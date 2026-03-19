@@ -1,0 +1,63 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "IPolkadotXCM",
+  "sourceName": "contracts/AegisVault.sol",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "bytes",
+          "name": "message",
+          "type": "bytes"
+        },
+        {
+          "internalType": "uint64",
+          "name": "maxWeight",
+          "type": "uint64"
+        }
+      ],
+      "name": "executeXcm",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint32",
+          "name": "parachainId",
+          "type": "uint32"
+        },
+        {
+          "internalType": "bytes",
+          "name": "assets",
+          "type": "bytes"
+        },
+        {
+          "internalType": "uint32",
+          "name": "feeAssetItem",
+          "type": "uint32"
+        },
+        {
+          "internalType": "uint64",
+          "name": "weightLimit",
+          "type": "uint64"
+        }
+      ],
+      "name": "sendXcm",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

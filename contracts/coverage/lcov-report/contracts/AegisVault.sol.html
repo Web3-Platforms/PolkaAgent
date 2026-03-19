@@ -1,0 +1,830 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for contracts/AegisVault.sol</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">contracts/</a> AegisVault.sol
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>23/23</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">96.88% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>31/32</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>9/9</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>32/32</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">28×</span>
+<span class="cline-any cline-yes">27×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">30×</span>
+<span class="cline-any cline-yes">29×</span>
+<span class="cline-any cline-yes">29×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+&nbsp;
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
+&nbsp;
+/**
+ * @dev Mock interface for Polkadot's XCM precompile
+ * In production, this would interact with the actual PolkadotXCM precompile
+ */
+interface IPolkadotXCM {
+    /// @dev Send XCM to a parachain with asset instructions
+    /// @param parachainId The destination parachain ID
+    /// @param assets Array of assets to send
+    /// @param feeAssetItem The index of the fee asset
+    /// @param weightLimit The weight limit for execution
+    function sendXcm(
+        uint32 parachainId,
+        bytes memory assets,
+        uint32 feeAssetItem,
+        uint64 weightLimit
+    ) external;
+&nbsp;
+    /// @dev Execute XCM program
+    /// @param message The XCM program to execute
+    /// @param maxWeight Maximum weight to consume
+    function executeXcm(bytes memory message, uint64 maxWeight)
+        external
+        returns (bool);
+}
+&nbsp;
+/**
+ * @title AegisVault
+ * @dev Intent-based, AI-guarded cross-chain yield vault for Polkadot Hub
+ * Users deposit ERC20 tokens and the vault routes yields across parachains
+ * based on AI risk assessment scores
+ */
+contract AegisVault is Ownable, ReentrancyGuard {
+    using SafeERC20 for IERC20;
+&nbsp;
+    error OnlyAIOracle(address caller);
+    error InvalidAIOracleAddress();
+    error InvalidOracleAddress();
+    error InvalidTokenAddress();
+    error TokenNotSupported(address token);
+    error AmountMustBeGreaterThanZero();
+    error InsufficientDepositBalance(
+        address account,
+        address token,
+        uint256 available,
+        uint256 requested
+    );
+    error RiskScoreTooHigh(uint256 riskScore);
+&nbsp;
+    // Mock XCM precompile address (represents the Polkadot XCM precompile)
+    address public constant POLKADOT_XCM = 0x0000000000000000000000000000000000000801;
+&nbsp;
+    // AI Oracle address authorized to call routeYieldViaXCM
+    address public aiOracleAddress;
+&nbsp;
+    // Supported deposit tokens
+    mapping(address =&gt; bool) public supportedTokens;
+&nbsp;
+    // User deposit tracking
+    mapping(address =&gt; mapping(address =&gt; uint256)) public userDeposits;
+&nbsp;
+    // Total deposits per token
+    mapping(address =&gt; uint256) public totalDeposits;
+&nbsp;
+    // Risk score threshold (max safe risk score is 74, anything &gt;= 75 is rejected)
+    uint256 public constant MAX_RISK_SCORE = 75;
+&nbsp;
+    /**
+     * @dev Emitted when a user deposits tokens
+     */
+    event Deposit(
+        address indexed user,
+        address indexed token,
+        uint256 amount,
+        uint256 timestamp
+    );
+&nbsp;
+    /**
+     * @dev Emitted when yield is routed via XCM
+     */
+    event YieldRoutedViaXCM(
+        uint32 indexed destParachainId,
+        uint256 amount,
+        uint256 riskScore,
+        uint256 timestamp
+    );
+&nbsp;
+    /**
+     * @dev Emitted when a user withdraws tokens
+     */
+    event Withdrawal(
+        address indexed user,
+        address indexed token,
+        uint256 amount,
+        uint256 timestamp
+    );
+&nbsp;
+    /**
+     * @dev Emitted when AI Oracle address is updated
+     */
+    event AIOracleUpdated(address indexed newOracleAddress);
+&nbsp;
+    /**
+     * @dev Emitted when a token is added to supported list
+     */
+    event TokenSupported(address indexed token);
+&nbsp;
+    /**
+     * @dev Modifier to ensure only the AI Oracle can call
+     */
+    modifier onlyAIOracle() {
+        address caller = _msgSender();
+        if (caller != aiOracleAddress) revert OnlyAIOracle(caller);
+        _;
+    }
+&nbsp;
+    /**
+     * @dev Constructor to initialize the vault
+     * @param initialOwner The address that will own the vault
+     * @param initialAiOracle The address of the AI Oracle
+     */
+    constructor(address initialOwner, address initialAiOracle) Ownable(initialOwner) {
+        if (initialAiOracle == address(0)) revert InvalidAIOracleAddress();
+        aiOracleAddress = initialAiOracle;
+    }
+&nbsp;
+    /**
+     * @dev Set the AI Oracle address
+     * @param newOracleAddress Address of the new AI Oracle
+     */
+    function setAIOracleAddress(address newOracleAddress) external onlyOwner {
+        if (newOracleAddress == address(0)) revert InvalidOracleAddress();
+        aiOracleAddress = newOracleAddress;
+        emit AIOracleUpdated(newOracleAddress);
+    }
+&nbsp;
+    /**
+     * @dev Add a supported deposit token
+     * @param token The ERC20 token address
+     */
+    function addSupportedToken(address token) external onlyOwner {
+        if (token == address(0)) revert InvalidTokenAddress();
+        supportedTokens[token] = true;
+        emit TokenSupported(token);
+    }
+&nbsp;
+    /**
+     * @dev Deposit ERC20 tokens into the vault
+     * @param token The ERC20 token to deposit
+     * @param amount The amount to deposit
+     */
+    function deposit(address token, uint256 amount)
+        external
+        nonReentrant
+    {
+        if (!supportedTokens[token]) revert TokenNotSupported(token);
+        if (amount == 0) revert AmountMustBeGreaterThanZero();
+&nbsp;
+        address sender = _msgSender();
+&nbsp;
+        // Transfer tokens from user to vault
+        IERC20(token).safeTransferFrom(sender, address(this), amount);
+&nbsp;
+        // Update tracking
+        userDeposits[sender][token] += amount;
+        totalDeposits[token] += amount;
+&nbsp;
+        emit Deposit(sender, token, amount, block.timestamp);
+    }
+&nbsp;
+    /**
+     * @dev Withdraw deposited tokens from the vault
+     * @param token The ERC20 token to withdraw
+     * @param amount The amount to withdraw
+     */
+    function withdraw(address token, uint256 amount)
+        external
+        nonReentrant
+    {
+        if (amount == 0) revert AmountMustBeGreaterThanZero();
+&nbsp;
+        address sender = _msgSender();
+        uint256 available = userDeposits[sender][token];
+        if (available &lt; amount) {
+            revert InsufficientDepositBalance(sender, token, available, amount);
+        }
+&nbsp;
+        // Update tracking
+        userDeposits[sender][token] -= amount;
+        totalDeposits[token] -= amount;
+&nbsp;
+        // Transfer tokens back to user
+        IERC20(token).safeTransfer(sender, amount);
+&nbsp;
+        emit Withdrawal(sender, token, amount, block.timestamp);
+    }
+&nbsp;
+    /**
+     * @dev Route yield across parachains via XCM
+     * Only callable by the AI Oracle
+     * Validates that the AI risk score is below the threshold
+     *
+     * @param destParachainId The destination parachain ID
+     * @param amount The amount of yield to route
+     * @param aiRiskScore The AI-calculated risk score (0-100)
+     *
+     * Requirements:
+     * - Only AI Oracle can call this function
+     * - aiRiskScore must be &lt; 75 (strictly less than MAX_RISK_SCORE)
+     */
+    function routeYieldViaXCM(
+        uint32 destParachainId,
+        uint256 amount,
+        uint256 aiRiskScore
+    ) external onlyAIOracle <span class="missing-if-branch" title="else path not taken" >E</span>nonReentrant {
+        if (aiRiskScore &gt;= MAX_RISK_SCORE) revert RiskScoreTooHigh(aiRiskScore);
+        if (amount == 0) revert AmountMustBeGreaterThanZero();
+&nbsp;
+        // Mock XCM routing
+        // In a production environment, this would call:
+        // IPolkadotXCM(POLKADOT_XCM).sendXcm(destParachainId, assetData, feeIndex, weightLimit);
+&nbsp;
+        emit YieldRoutedViaXCM(destParachainId, amount, aiRiskScore, block.timestamp);
+    }
+&nbsp;
+    /**
+     * @dev Get the vault balance for a specific token
+     * @param token The ERC20 token address
+     * @return The balance of the token in the vault
+     */
+    function getVaultBalance(address token) external view returns (uint256) {
+        return IERC20(token).balanceOf(address(this));
+    }
+&nbsp;
+    /**
+     * @dev Get user's deposit balance for a specific token
+     * @param user The user address
+     * @param token The ERC20 token address
+     * @return The user's deposit balance
+     */
+    function getUserDeposit(address user, address token)
+        external
+        view
+        returns (uint256)
+    {
+        return userDeposits[user][token];
+    }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Mar 19 2026 23:53:40 GMT+0200 (Eastern European Standard Time)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>
