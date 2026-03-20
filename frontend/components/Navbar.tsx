@@ -32,9 +32,9 @@ export function Navbar() {
   return (
     <header className="aegis-nav">
       <div className="aegis-shell">
-        <nav className="aegis-nav-shell">
-          <div className="flex items-center gap-3">
-            <BrandMark className="h-12 w-12 shrink-0" />
+        <nav className="aegis-nav-shell animate-fade-in">
+          <Link href="/" className="flex items-center gap-3 transition-transform hover:scale-105 active:scale-95">
+            <BrandMark className="h-12 w-12 shrink-0 transition-transform" />
             <div>
               <p className="aegis-display text-[1.55rem] leading-none text-[var(--aegis-brand-900)]">
                 AEGIS
@@ -43,7 +43,7 @@ export function Navbar() {
                 Protocol
               </p>
             </div>
-          </div>
+          </Link>
 
           <div className="aegis-nav-links">
             {navLinks.map((link) => {
