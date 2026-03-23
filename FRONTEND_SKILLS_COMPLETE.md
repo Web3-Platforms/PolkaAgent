@@ -435,7 +435,7 @@ Ongoing:    ☐ Security & Accessibility reviews
 ## 📞 Repository Structure
 
 ```
-Project Root: /Users/ekf/Downloads/Projects/Polka Agent/PolkaAgent-1/
+Project Root: /Users/ekf/Downloads/Projects/Polka Agent/Aegis-Protocol/
 
 ├── contracts/ (Smart Contracts - COMPLETE)
 │   ├── AegisVault.sol

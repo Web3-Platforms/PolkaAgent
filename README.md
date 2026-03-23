@@ -85,7 +85,7 @@ Acala / Astar / Moonbeam / Parallel / others
 
 ```bash
 git clone <repo-url>
-cd PolkaAgent-1
+cd Aegis-Protocol
 ```
 
 ### 2. Install Contract Dependencies
@@ -169,7 +169,7 @@ npm run test:e2e
 ## Repository Layout
 
 ```text
-PolkaAgent-1/
+Aegis-Protocol/
 ├── contracts/
 │   ├── contracts/AegisVault.sol
 │   ├── scripts/deploy.js
