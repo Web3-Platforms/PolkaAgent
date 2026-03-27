@@ -322,7 +322,7 @@ function encodeInteriorX2(tokenAddress: string): string {
 export function encodeAssetDataForXCM(
   tokenAddress: string,
   amount: bigint,
-  destParachainId: number = 1000,
+  _destParachainId: number = 1000,
   assetType: AssetType = AssetType.WRAPPER_MAPPED,
   assetId?: number
 ): `0x${string}` {
@@ -348,7 +348,7 @@ export function encodeAssetDataForXCM(
  */
 export function encodeNativeAssetData(
   amount: bigint,
-  destParachainId: number = 1000
+  _destParachainId: number = 1000
 ): `0x${string}` {
   const asset: XCMAsset = {
     id: "0x0000000000000000000000000000000000000000",
@@ -373,7 +373,7 @@ export function encodeWrapperAssetData(
   tokenAddress: string,
   amount: bigint,
   statemineAssetId: number,
-  destParachainId: number = 1000
+  _destParachainId: number = 1000
 ): `0x${string}` {
   const asset: XCMAsset = {
     id: tokenAddress,
@@ -605,5 +605,3 @@ export async function createXCMMessage(
   return encodedAssets;
 }
 
-// Export types for external use
-export type { XCMAsset, XCMEncodeOptions };

@@ -166,7 +166,6 @@ export function XcmRoutePanel() {
       const deadlineTimestamp = Math.floor(Date.now() / 1000) + (formData.deadlineMinutes * 60);
       
       // Calculate minAmountOut based on slippage tolerance
-      const amountWei = BigInt(Math.floor(parseFloat(formData.amount) * 1e6));
       const minAmountOut = (amountWei * BigInt(Math.floor((100 - formData.slippageTolerance) * 100))) / BigInt(10000);
 
       // Call the API
