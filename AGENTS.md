@@ -78,6 +78,9 @@ npm test                        # Run all unit tests (Hardhat)
 npm run coverage                # Solidity coverage report
 npm run gas                     # Gas profiling (AegisVault.gas.test.js)
 npm run compile                 # Compile only
+npm run setup                   # Full deploy: vault + mock tokens + config (recommended)
+npm run deploy                  # Vault only (use setup instead)
+npm run mint                    # Mint test tokens to RECIPIENT wallet
 npm run deploy                  # Deploy to Paseo (requires PRIVATE_KEY env var)
 ```
 
@@ -106,6 +109,10 @@ NEXT_PUBLIC_PASEO_RPC_URL
 NEXT_PUBLIC_AEGIS_VAULT_ADDRESS
 NEXT_PUBLIC_WPAS_ADDRESS
 NEXT_PUBLIC_TEST_USDC_ADDRESS
+DEST_PARACHAIN_ID
+AI_ORACLE_PRIVATE_KEY          # server-side only — never NEXT_PUBLIC_
+OPENAI_API_KEY                 # optional — enables real LLM risk scoring
+GEMINI_API_KEY                 # optional — alternative LLM provider
 DESTINATION_VAULT_ADDRESS
 DEST_PARACHAIN_ID
 ```
@@ -119,6 +126,7 @@ DEST_PARACHAIN_ID
 ```
 User intent (text)
   → POST /api/risk-oracle  { intent }
+  ← { parachainId, riskScore, safeToRoute, scoringMethod }
   ← { parachainId, riskScore, safeToRoute }
   → UI shows risk score
   → if safeToRoute: show "Confirm Transaction" button
@@ -126,6 +134,24 @@ User intent (text)
   → contract checks aiRiskScore < 75, else reverts
 ```
 
+The oracle tries LLM providers in order: OpenAI → Gemini → keyword fallback.
+Set `OPENAI_API_KEY` or `GEMINI_API_KEY` in `.env.local` to enable real scoring.
+The response shape `{ parachainId, riskScore, safeToRoute, scoringMethod }` must
+not change — the frontend and execute-route API both depend on it.
+
+### XCM Precompile Status
+
+The XCM precompile at `0x0000000000000000000000000000000000000801` does **not**
+exist on Paseo's EVM layer. `setup-paseo.js` sets `xcmPrecompileAddress` to
+`address(0)` so `routeYieldViaXCM` calls succeed as a no-op. When Polkadot Hub
+ships the precompile, call `vault.setXCMPrecompileAddress(realAddr)` from the
+owner wallet.
+
+### Deployed Contract Version
+
+The contract at `0x2BEf17e09b6F9a589d284f62F74281f0580969B3` is an **outdated
+version** (2982 bytes vs 8782 bytes in current source). Always run `npm run setup`
+to deploy the current version before testing real transactions.
 The oracle currently uses keyword matching (no external LLM call). Any LLM
 integration must keep the response shape identical.
 
@@ -164,6 +190,14 @@ Addresses are resolved from env vars with zero-address fallbacks for local UI de
   Class names use the `aegis-*` prefix for layout primitives.
 
 ---
+
+## Key Files Added in This Session
+
+| File | Purpose |
+|------|---------|
+| `contracts/scripts/setup-paseo.js` | Full deploy: vault + tokens + config. Use instead of `deploy.js`. |
+| `contracts/scripts/mint-tokens.js` | Mint test tokens to a wallet after setup. |
+| `GUIDE.md` | Complete project guide — read this before asking questions. |
 
 ## What Agents Should Not Do
 
