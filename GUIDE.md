@@ -675,7 +675,7 @@ and small deposit/withdraw smoke proofs through the live vault interface.
 5. Add `AI_ORACLE_PRIVATE_KEY` as a **server-side** env var (not `NEXT_PUBLIC_`).
 6. Deploy.
 
-`frontend/vercel.json` is the only Vercel config file. Do **not** add a `vercel.json` at the repo root — it conflicts with the `rootDirectory: frontend` project setting and breaks the build with `ENOENT .next/routes-manifest-deterministic.json`.
+`frontend/vercel.json` provides the only Vercel config that should live in the repo. Do **not** add a `vercel.json` at the repo root — it conflicts with the `rootDirectory: frontend` project setting. If Vercel builds start failing with `ENOENT .next/routes-manifest-deterministic.json`, see the troubleshooting section below for the verified two-part fix (`postbuild` script + `outputFileTracingRoot: repoRoot`).
 
 ### Operator relay deployment (Railway)
 
@@ -858,14 +858,35 @@ surface.
 This was a pre-existing bug in `TransactionHistory.tsx` — fixed in this session.
 Run `npm run build` again.
 
-### Vercel build fails — framework not detected or wrong output directory
-If Vercel can't find the Next.js framework or reports the output directory is wrong:
+### Vercel build fails — `ENOENT routes-manifest-deterministic.json`
 
-1. In the Vercel project dashboard → **General → Root Directory** → set to `frontend`.
-   This is the preferred path. Vercel then uses `frontend/vercel.json` automatically.
-2. If you cannot change the dashboard setting, the repo root `vercel.json` provides a safe
-   fallback with explicit `installCommand`, `buildCommand`, `outputDirectory`, and security headers.
-3. **Also** ensure `frontend/package-lock.json` pins the Linux native CSS packages (see next entry).
+Vercel's `@vercel/next` adapter (updated ~April 2026) now hardcodes the repo-root path when checking for `routes-manifest-deterministic.json`, even when `rootDirectory: frontend` is set. With `rootDirectory: frontend`, Next.js outputs to `frontend/.next/` but the adapter looks at `/vercel/path0/.next/`.
+
+**The fix is two parts — both must be present:**
+
+1. `frontend/package.json` must have a `postbuild` script that copies `.next/` to the repo root on Vercel:
+   ```json
+   "postbuild": "[ -n \"$VERCEL\" ] && (rm -rf ../.next && cp -r .next ../.next) || true"
+   ```
+2. `frontend/next.config.ts` must set `outputFileTracingRoot` to the repo root (not `frontend/`):
+   ```ts
+   const repoRoot = fileURLToPath(new URL("..", import.meta.url));
+   // ...
+   outputFileTracingRoot: repoRoot,
+   ```
+
+Without both changes: (1) `routes-manifest-deterministic.json` not found; (2) `node_modules/next/` resolved at wrong path by the Vercel adapter.
+
+Do **not** use `distDir: "../.next"` — Turbopack (default in Next.js 16) rejects parent-directory distDir with a fatal error.
+Do **not** clear `rootDirectory` in Vercel — framework auto-detection fails since the repo-root `package.json` doesn't list `next`.
+
+### Vercel build fails — framework not detected
+
+If Vercel can't find the Next.js framework:
+
+1. Ensure `rootDirectory: frontend` is set in the Vercel project dashboard (General → Root Directory).
+   This is required. Clearing it causes "No Next.js version detected" errors.
+2. **Also** ensure `frontend/package-lock.json` pins the Linux native CSS packages (see next entry).
 
 ### Railway build fails with missing `lightningcss` or `@tailwindcss/oxide`
 If Railway logs show `Cannot find native binding`, `lightningcss.linux-x64-gnu.node`,
