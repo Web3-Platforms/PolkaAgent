@@ -670,12 +670,12 @@ and small deposit/withdraw smoke proofs through the live vault interface.
 
 1. Push to GitHub.
 2. Connect the repo to Vercel.
-3. Set root directory to `frontend`.
+3. **Set Root Directory to `frontend`** in Vercel project settings (General → Root Directory).
 4. Add all `NEXT_PUBLIC_*` env vars from your `.env.local`.
 5. Add `AI_ORACLE_PRIVATE_KEY` as a **server-side** env var (not `NEXT_PUBLIC_`).
 6. Deploy.
 
-The `frontend/vercel.json` file is already configured.
+`frontend/vercel.json` is the only Vercel config file. Do **not** add a `vercel.json` at the repo root — it conflicts with the `rootDirectory: frontend` project setting and breaks the build with `ENOENT .next/routes-manifest-deterministic.json`.
 
 ### Operator relay deployment (Railway)
 
